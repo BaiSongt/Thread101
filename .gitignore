@@ -1,0 +1,66 @@
+# macOS 系统文件
+.DS_Store
+._*
+
+# 编译生成的文件
+build/
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+*.out
+*.app/  # macOS 应用程序包（如果适用）
+
+# IDE 和编辑器相关
+.vscode/          # VS Code 配置
+.idea/            # JetBrains IDE (CLion, IntelliJ 等)
+*.suo             # Visual Studio 用户选项
+*.user            # Visual Studio 用户配置
+*.swp             # Vim 临时文件
+*.swn             # Vim 临时文件
+*.swo             # Vim 临时文件
+*.nbstate         # Jupyter Notebook 状态（如果适用）
+
+# CMake 相关
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+*.cmake
+
+# Ninja 构建系统（如果使用）
+.ninja_deps
+.ninja_log
+
+# 包管理器生成的文件
+brew/             # Homebrew 相关（通常不需要）
+pkgconfig/        # pkg-config 文件
+*.pc              # pkg-config 文件
+
+# 测试和调试文件
+*.log
+*.test
+*.tmp
+*.bak
+*.swp
+
+# Python 相关（如果项目混合使用 Python）
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# 其他可能的临时文件
+*.dSYM/           # macOS 调试符号（如果适用）
+*.ipch            # Visual Studio 预编译头
+*.ilk             # Visual Studio 增量链接文件
+*.pdb             # 调试符号（Windows，但 macOS 可能也有类似文件）
+*.idb             # Visual Studio 数据库文件
+*.exp             # 导出文件（Windows，但 macOS 可能也有类似文件）
+
+
+.vscode
+bin/*.dSYM/
