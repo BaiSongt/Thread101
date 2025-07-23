@@ -12,32 +12,53 @@ class Para {
   const string s_name = "Class(Para)";
 };
 
-
-void threadMain(int p1, float p2, string str, Para p4){
+void threadMain(int p1, float p2, string str, Para p4) {
   this_thread::sleep_for(100ms);
-  cout << "threadMain thread ID:" << this_thread::get_id() << endl;
-  cout << "threadMain(" << " p1 = " << p1
-                        << " p2 = " << p2
-                        << " p3 = " << str
-                        << " p4 = " << p4.s_name << endl;
+  cout << "function thread ID:" << this_thread::get_id() << endl;
+  cout << "function(" << " p1 = " << p1 << " p2 = " << p2 << " p3 = " << str
+       << " p4 = " << p4.s_name << endl;
 }
 
+void threadPtr(Para* p) {
+  this_thread::sleep_for(100ms);
+  cout << "function thread ID:" << this_thread::get_id() << endl;
+  cout << "function(" << " p* -> " << p->s_name << endl;
+}
 
-int main(int argc, char const *argv[])
-{
+void threadRef(Para& p) {
+  this_thread::sleep_for(100ms);
+  cout << "function thread ID:" << this_thread::get_id() << endl;
+  cout << "function(" << " &p " << p.s_name << endl;
+}
 
+int main(int argc, char const* argv[]) {
   cout << "Main thread ID:" << this_thread::get_id() << endl;
 
-  thread th;
+  cout << "\nRef ================= " << endl;
+  {  // 引用传递
+    Para p;
+    thread th(threadRef, ref(p));
+    cout << "threadRef th ID:" << th.get_id() << endl;
+    th.join();
+  }
+
+  cout << "\nPtr ================= " << endl;
+  {  // 指针传递
+    Para p;
+    thread th(threadPtr, &p);
+    cout << "threadPtr th ID:" << th.get_id() << endl;
+    th.join();
+  }
+
+  cout << "\nVal copy ================= " << endl;
   {
     float f1 = 12.3f;
     Para p;
     // 所有参数做复制
-    th = thread(threadMain, 103, f1, "TestPara ", p);
-    cout << "th ID:" << th.get_id() << endl;
+    thread th(threadMain, 103, f1, "TestPara ", p);
+    cout << "threadMain th ID:" << th.get_id() << endl;
+    th.join();
   }
 
-  th.join();
   return 0;
 }
-
